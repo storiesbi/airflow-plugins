@@ -16,19 +16,19 @@ requirements = [
 ]
 
 setup_requirements = [
-    "pytest-runner",
-    "python-slugify==1.1.4",
-    "psycopg2==2.6.2",
+    "python-slugify>=1.1.4",
+    "psycopg2>=2.6.2",
     "boto==2.45.0",
-    "csvkit==1.0.1",
+    "csvkit==1.0.2",
     "slackclient==1.0.4",
-    "six==1.10.0",
+    "six==1.11.0",
     "paramiko==2.3.1",
     "pytz==2017.2",
 ]
 
 test_requirements = [
     "pytest",
+    "psycopg2>=2.6.2",
     "coverage==4.1",
     "pytest==3.0.7",
     "pytest-cov==2.4.0",
