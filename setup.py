@@ -38,13 +38,13 @@ test_requirements = [
 
 setup(
     name='airflow-plugins',
-    version='0.1.1',
+    version='0.1.3',
     description="Airflow plugins.",
     long_description=readme + '\n\n' + history,
     author="Michael Kuty",
     author_email='michael.kuty@stories.bi',
-    url='https://github.com/storiesbi/airflow_plugins',
-    packages=find_packages(include=['airflow_plugins.*']),
+    url='https://github.com/storiesbi/airflow-plugins',
+    packages=find_packages(include=['airflow_plugins.*', 'airflow_plugins']),
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
