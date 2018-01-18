@@ -12,10 +12,6 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = [
-    # TODO: put package requirements here
-]
-
-setup_requirements = [
     "python-slugify>=1.1.4",
     "psycopg2>=2.6.2",
     "boto==2.45.0",
@@ -23,7 +19,10 @@ setup_requirements = [
     "slackclient==1.0.4",
     "six==1.11.0",
     "paramiko==2.3.1",
-    "pytz==2017.2",
+    "pytz==2017.2"
+]
+
+setup_requirements = [
 ]
 
 test_requirements = [
@@ -39,13 +38,13 @@ test_requirements = [
 
 setup(
     name='airflow-plugins',
-    version='0.1.0',
+    version='0.1.1',
     description="Airflow plugins.",
     long_description=readme + '\n\n' + history,
     author="Michael Kuty",
     author_email='michael.kuty@stories.bi',
-    url='https://github.com/michaelkuty/airflow_plugins',
-    packages=find_packages(include=['airflow_plugins']),
+    url='https://github.com/storiesbi/airflow_plugins',
+    packages=find_packages(include=['airflow_plugins.*']),
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",

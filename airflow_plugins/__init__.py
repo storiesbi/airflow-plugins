@@ -2,7 +2,7 @@
 import logging
 from datetime import timedelta
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 try:
     from airflow.configuration import get
