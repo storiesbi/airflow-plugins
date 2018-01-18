@@ -1,9 +1,8 @@
 import logging
 from urllib.parse import urlencode
 
+from airflow_plugins import utils
 from slackclient import SlackClient
-
-from asp import utils
 
 
 def _compose_title_url(dag_run, env):

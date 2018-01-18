@@ -8,8 +8,8 @@ from boto.s3.key import Key
 from mock import Mock
 from moto import mock_s3
 
-from asp.plugins.operators import FileSensor
-from asp.utils import get_or_update_conn
+from airflow_plugins.operators import FileSensor
+from airflow_plugins.utils import get_or_update_conn
 
 ctx = {'params': {}, 'ti': Mock(start_date=datetime.now())}
 
