@@ -1,0 +1,2 @@
+"date","bookings_count","sectors_count","passengers_count","seats_count","bags_count","booked_at","partner","market","airlines","currency","nationality","device_type","trip_type","src_dst","src","dst","transfers","booking_channel","AT_sales","insurance_costs","has_kiwi_interlining","extras_sales","refunds","AT_costs","turnover","margin","intra space"
+"2016-11-14","1","1","1","1","0","false","kayak","NZ","JQ","NZD","NZ","pc","oneway","CNS - MEL","CNS","MEL","direct","undefined","155.03","0.00","false","0.00","0.00","0.00","155.03","1.00","value"
