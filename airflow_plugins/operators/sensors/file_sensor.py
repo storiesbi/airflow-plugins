@@ -182,8 +182,7 @@ class FileSensor(BaseSensorOperator, FileOperator):
 
         elif self.conn.conn_type == "s3":
             hook = S3Hook(self.conn_id)
-            bucket, key = self._get_s3_path(self.path)
-            fileobj = hook.get_bucket(bucket).get_key(key)
+            fileobj = hook.get_key(self.path)
 
             if not fileobj:
                 msg = 'The file does not exist'

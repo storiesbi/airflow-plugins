@@ -73,11 +73,6 @@ class FileOperator(BaseOperator):
     def _get_ftp_path(self, path):
         return self._split_path(path)[-1]
 
-    def _get_s3_path(self, path):
-        bucket, key = self._split_path(path)[1:]
-        bucket = bucket or 'storiesbi-datapipeline'
-        return (bucket, key)
-
     def pre_execute(self, context):
         params = context['params']
         for param in ['local_path', 'remote_path']:
