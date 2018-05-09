@@ -34,8 +34,7 @@ class DownloadFile(FileOperator):
 
         elif self.conn and self.conn.conn_type == "s3":
             hook = S3Hook(self.conn_id)
-            bucket, key = self._get_s3_path(self.remote_path)
-            fileobj = hook.get_bucket(bucket).get_key(key)
+            fileobj = hook.get_key(self.remote_path)
             fileobj.get_contents_to_filename(self.local_path)
 
         else:
@@ -61,7 +60,7 @@ class UploadFile(FileOperator):
 
         elif self.conn and self.conn.conn_type == "s3":
             hook = S3Hook(self.conn_id)
-            bucket, key = self._get_s3_path(self.remote_path)
+            bucket, key = hook.parse_s3_url(self.remote_path)
             hook.load_file(self.local_path, key, bucket, replace=True)
 
         else:

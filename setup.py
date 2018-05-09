@@ -14,7 +14,7 @@ with open('HISTORY.rst') as history_file:
 requirements = [
     "python-slugify>=1.1.4",
     "psycopg2>=2.6.2",
-    "boto==2.45.0",
+    "boto3>=1.6.14",
     "csvkit==1.0.2",
     "slackclient==1.0.4",
     "six==1.11.0",

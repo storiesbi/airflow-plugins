@@ -3,6 +3,7 @@ import os.path
 import time
 from datetime import datetime, timedelta
 
+import pytz
 from airflow.exceptions import (
     AirflowException,
     AirflowSensorTimeout,
@@ -12,6 +13,7 @@ from airflow.hooks.S3_hook import S3Hook
 from airflow.operators.sensors import BaseSensorOperator
 from airflow.utils.decorators import apply_defaults
 from pytz import timezone
+from pytz.exceptions import UnknownTimeZoneError
 
 from airflow_plugins.hooks import FTPHook
 from airflow_plugins.operators import FileOperator
@@ -66,7 +68,14 @@ class FileSensor(BaseSensorOperator, FileOperator):
             send_notification(ti.get_dagrun(), text, title, color)
             return
 
-        runtime = datetime.now() - ti.start_date
+        try:
+            tz = timezone(ti.start_date.tm_zone)
+        except (AttributeError, UnknownTimeZoneError):  # tm_zone not set on t
+            runtime = datetime.now() - ti.start_date.replace(tzinfo=None)
+        else:
+            runtime = datetime.utcnow().replace(
+                tzinfo=ti.tm_zone) - ti.start_date
+
         if runtime >= self.notify_after:
             if (self.last_notification is None or
                     runtime >= self.last_notification + self.notify_delta):
@@ -182,8 +191,7 @@ class FileSensor(BaseSensorOperator, FileOperator):
 
         elif self.conn.conn_type == "s3":
             hook = S3Hook(self.conn_id)
-            bucket, key = self._get_s3_path(self.path)
-            fileobj = hook.get_bucket(bucket).get_key(key)
+            fileobj = hook.get_key(self.path)
 
             if not fileobj:
                 msg = 'The file does not exist'
@@ -197,6 +205,10 @@ class FileSensor(BaseSensorOperator, FileOperator):
 
             def get_last_modified(fileobj):
                 timestamp = fileobj.last_modified
+
+                if isinstance(timestamp, datetime):
+                    return timestamp
+
                 tformat = '%a, %d %b %Y %H:%M:%S %Z'
                 dt = datetime.strptime(timestamp, tformat)
                 t = time.strptime(timestamp, tformat)
